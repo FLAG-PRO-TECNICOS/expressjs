@@ -9,7 +9,7 @@ export function healthCheck(req, res) {
 
 	const response = {
 		status: 'ok',
-		time: currentTime,
+		time: currentTime
 	}
 
 	res.json(response)

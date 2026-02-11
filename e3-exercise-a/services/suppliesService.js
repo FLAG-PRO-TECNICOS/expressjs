@@ -33,6 +33,14 @@ export function addSupply(name, category, quantity) {
 	return supply
 }
 
+export function removeSupply(id) {
+	const index = supplies.findIndex((value) => value.id == id)
+	if (index >= 0) {
+		supplies.splice(index, 1)
+	}
+	return index == -1 ? false : true
+}
+
 function getNewId() {
 	// Classic way
 	// let maxId = 0

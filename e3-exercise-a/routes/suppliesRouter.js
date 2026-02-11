@@ -2,7 +2,8 @@ import express from 'express'
 import {
 	getAllSupplies,
 	getSupply,
-	createSupply
+	createSupply,
+	deleteSupply
 } from '../controllers/suppliesController.js'
 
 const router = express.Router()
@@ -11,5 +12,7 @@ const router = express.Router()
 router.get('/', getAllSupplies)
 router.get('/:id', getSupply)
 router.post('/', createSupply)
+
+router.delete('/:id', deleteSupply)
 
 export default router

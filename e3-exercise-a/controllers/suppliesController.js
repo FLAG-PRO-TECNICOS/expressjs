@@ -1,4 +1,9 @@
-import { getSupplies, getSupplyById } from '../services/suppliesService.js'
+import {
+	getSupplies,
+	getSupplyById,
+	addSupply
+} from '../services/suppliesService.js'
+import * as z from 'zod'
 
 export function getAllSupplies(req, res) {
 	const { category, minQty } = req.query
@@ -24,4 +29,24 @@ export function getSupply(req, res) {
 	}
 
 	res.json(result)
+}
+
+export function createSupply(req, res) {
+	const SupplyBody = z.object({
+		name: z.string(),
+		category: z.string(),
+		quantity: z.number()
+	})
+
+	const parsedResult = SupplyBody.safeParse(req.body)
+	if (!parsedResult.success) {
+		res.status(400).json({ error: 'Invalid supply data' })
+		return
+	}
+
+	const { name, category, quantity } = parsedResult.data
+
+	const result = addSupply(name, category, quantity)
+
+	res.status(201).json(result)
 }

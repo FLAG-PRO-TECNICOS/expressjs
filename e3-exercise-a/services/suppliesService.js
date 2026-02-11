@@ -19,3 +19,40 @@ export function getSupplies(category, minQuantity) {
 export function getSupplyById(id) {
 	return supplies.find((value) => value.id == id)
 }
+
+export function addSupply(name, category, quantity) {
+	const supply = {
+		id: getNewId(),
+		name,
+		category,
+		quantity
+	}
+
+	supplies.push(supply)
+
+	return supply
+}
+
+function getNewId() {
+	// Classic way
+	// let maxId = 0
+	// for (let i = 0; i < supplies.length; i++) {
+	// 	if (supplies[i].id > maxId) {
+	// 		maxId = supplies[i].id
+	// 	}
+	// }
+	// const newId = maxId + 1
+
+	// Using map and Math.max
+	// const ids = supplies.map(function (value) {
+	// 	return value.id
+	// })
+	// console.log(ids)
+	// const maxId = Math.max(...ids)
+	// const newId = maxId + 1
+
+	const maxId = Math.max(...supplies.map((value) => value.id))
+	const newId = maxId <= 0 ? 1 : maxId + 1
+
+	return newId
+}

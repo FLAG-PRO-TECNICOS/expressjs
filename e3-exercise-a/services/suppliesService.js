@@ -33,6 +33,18 @@ export function addSupply(name, category, quantity) {
 	return supply
 }
 
+export function updateSupply(id, delta) {
+	const supply = getSupplyById(id)
+	if (!supply) {
+		return 'not found'
+	}
+	if (supply.quantity + delta < 0) {
+		return 'invalid quantity'
+	}
+	supply.quantity += delta
+	return supply
+}
+
 export function removeSupply(id) {
 	const index = supplies.findIndex((value) => value.id == id)
 	if (index >= 0) {

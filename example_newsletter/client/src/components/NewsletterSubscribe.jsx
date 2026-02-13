@@ -17,6 +17,7 @@ export default function NewsletterSubscribe() {
 			body: JSON.stringify({ email }),
 		})
 		const result = await response.json()
+		console.log(result)
 
 		if (result.status === 'ok') {
 			setSubmitted(true)

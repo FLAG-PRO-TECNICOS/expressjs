@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 export default function NewsletterSubscribe() {
 	const [email, setEmail] = useState('')
+	const [name, setName] = useState('')
 	const [submitted, setSubmitted] = useState(false)
 	const [errorMessage, setErrorMessage] = useState('')
 
@@ -14,7 +15,7 @@ export default function NewsletterSubscribe() {
 			headers: {
 				'content-type': 'application/json',
 			},
-			body: JSON.stringify({ email }),
+			body: JSON.stringify({ email, name }),
 		})
 		const result = await response.json()
 		console.log(result)
@@ -51,6 +52,22 @@ export default function NewsletterSubscribe() {
 						<p className="text-xs text-slate-500">
 							We’ll never share your email.
 						</p>
+					</div>
+					<div className="space-y-1">
+						<label
+							htmlFor="name"
+							className="text-sm font-medium text-slate-700"
+						>
+							Name
+						</label>
+						<input
+							value={name}
+							onChange={(e) => setName(e.target.value)}
+							id="name"
+							name="name"
+							placeholder="Max Musterman"
+							className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-300"
+						/>
 					</div>
 
 					<div className="flex flex-col gap-3 sm:flex-row sm:items-center">
